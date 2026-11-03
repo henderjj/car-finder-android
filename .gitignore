@@ -1,0 +1,30 @@
+# Gradle / build output
+.gradle/
+build/
+.kotlin/
+.externalNativeBuild
+.cxx
+
+# Local machine config (SDK path etc.) — never commit
+local.properties
+
+# IDE
+/.idea
+*.iml
+.DS_Store
+/captures
+
+# Release artifacts and signing material — never commit
+/app/release/
+*.apk
+*.aab
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# Google services config (not used today; keep out of the repo if added)
+google-services.json
+
+# Claude Code per-user settings
+.claude/settings.local.json

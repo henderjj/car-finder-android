@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Car Finder</string>
+
+    <string name="setup_title">Pair your car</string>
+    <string name="setup_subtitle">Choose which paired Bluetooth device is your car. Car Finder will save your location whenever this device disconnects.</string>
+    <string name="setup_refresh">Refresh list</string>
+    <string name="setup_no_devices">No paired devices found. Pair your phone with your car first, then come back here.</string>
+    <string name="setup_grant_bluetooth">Grant Bluetooth permission</string>
+    <string name="setup_open_settings">Open Bluetooth settings</string>
+
+    <string name="main_no_location_title">No parking saved yet</string>
+    <string name="main_no_location_subtitle">Drive, then disconnect your phone from the car. The location is captured automatically — or use the button below to save it now.</string>
+    <string name="main_save_now">Save parking now</string>
+    <string name="main_clear">Clear saved location</string>
+    <string name="main_change_car">Change paired car</string>
+    <string name="main_distance_metres">%1$.0f m</string>
+    <string name="main_distance_km">%1$.2f km</string>
+    <string name="main_saved_at">Saved %1$s</string>
+
+    <string name="main_details_add">Add car park details</string>
+    <string name="main_details_edit">Edit car park details</string>
+    <string name="details_dialog_title">Car park details</string>
+    <string name="details_field_level">Level</string>
+    <string name="details_field_section">Section</string>
+    <string name="details_field_space">Space</string>
+    <string name="details_save">Save</string>
+    <string name="details_cancel">Cancel</string>
+    <string name="details_clear">Clear all</string>
+    <string name="details_level_prefix">Level %1$s</string>
+    <string name="details_section_prefix">Section %1$s</string>
+    <string name="details_space_prefix">Space %1$s</string>
+
+    <string name="notif_channel_capture_name">Parking captured</string>
+    <string name="notif_channel_capture_description">Notifies you when Car Finder saves a new parking location.</string>
+    <string name="notif_capture_title">Parking saved</string>
+    <string name="notif_capture_text">Tap to view the location.</string>
+    <string name="notif_action_add_details">Add bay details</string>
+
+    <string name="notif_channel_service_name">Capturing location</string>
+    <string name="notif_channel_service_description">Shown briefly while Car Finder fetches a GPS fix after your car disconnects.</string>
+    <string name="notif_service_text">Capturing parking location…</string>
+
+    <string name="permission_location_rationale_title">Location permission needed</string>
+    <string name="permission_location_rationale_body">Car Finder needs your location to remember where you parked. Allow precise location, then enable background access so it works after Bluetooth disconnects.</string>
+    <string name="permission_background_rationale_title">Allow location all the time</string>
+    <string name="permission_background_rationale_body">When your car\'s Bluetooth disconnects, Car Finder is in the background — Android only lets it fetch the parking fix if location is set to \"Allow all the time\". Tap Grant and choose \"Allow all the time\" on the next screen.</string>
+    <string name="permission_notifications_rationale_title">Notifications</string>
+    <string name="permission_notifications_rationale_body">Allow notifications so Car Finder can confirm when your parking location is saved and offer the one-tap shortcut to add bay details.</string>
+    <string name="permission_battery_rationale_title">Let Car Finder run when parked</string>
+    <string name="permission_battery_rationale_body">Android blocks background apps from starting the parking capture unless they\'re exempt from battery optimisation. Without this, automatic capture may silently never run. Tap Grant and choose \"Allow\".</string>
+    <string name="permission_open_settings">Open settings</string>
+    <string name="permission_grant">Grant</string>
+    <string name="permission_skip">Skip</string>
+</resources>
