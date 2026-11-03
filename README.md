@@ -12,9 +12,9 @@ When your phone disconnects from the car's Bluetooth, the app fetches a GPS fix 
 
 ## Tech stack
 
-- Kotlin 2.2 + Jetpack Compose + Material 3
-- AGP 9.2 + Gradle 9.4 + JDK 17 (bytecode), Android Studio's bundled JBR for runtime
-- compileSdk / targetSdk 35 (Android 15), minSdk 28 (Android 9)
+- Kotlin 2.4 + Jetpack Compose (BOM 2026.09) + Material 3
+- AGP 9.5 + Gradle 9.8 + JDK 17 (bytecode), Android Studio's bundled JBR for runtime
+- compileSdk / targetSdk 37 (Android 17), minSdk 28 (Android 9)
 - osmdroid 6.1 for the in-app map (no API key required)
 - Google Play Services FusedLocationProviderClient for the GPS fix
 - DataStore Preferences for persistence
@@ -27,7 +27,7 @@ When your phone disconnects from the car's Bluetooth, the app fetches a GPS fix 
    git clone https://github.com/henderjj/car-finder-android.git
    ```
 2. Launch Android Studio (Ladybug or newer), choose **File → Open** and select the `car-finder-android` folder. Studio writes a `local.properties` pointing at your Android SDK on first sync; that file is machine-specific and git-ignored.
-3. The Gradle wrapper is committed and pins Gradle 9.4.1, so the first sync downloads the right Gradle version automatically.
+3. The Gradle wrapper is committed and pins Gradle 9.8.2 (with a SHA-256 checksum of the distribution), so the first sync downloads and verifies the right Gradle version automatically.
 4. **File → Settings → Build, Execution, Deployment → Build Tools → Gradle → Gradle JDK**: pick the **Embedded JDK** (`jbr-21`) or any installed JDK 17+. The project intentionally doesn't declare a Kotlin toolchain, so it inherits whatever JDK Studio launches Gradle with.
 5. Plug in a real Android device (emulators can't pair with your car) and run **app**.
 
@@ -67,7 +67,7 @@ app/src/main/java/com/henderjj/carfinder/
 
 ## Notable design choices
 
-- **Portrait-locked** (`android:screenOrientation="portrait"`). It's a phone-only utility — landscape adds no value, and locking it means rotation no longer tears down the Activity.
+- **Portrait-locked on phones** (`android:screenOrientation="portrait"`). It's a phone-first utility and landscape adds little. Since the app targets API 37, Android ignores the lock on large screens (smallest width ≥ 600dp: tablets, unfolded foldables), so the UI must also work in landscape and survive rotation — UI state that must persist across recreation (the details dialog, the "Change paired car" screen) uses `rememberSaveable`.
 - **`launchMode="singleTop"`** so the "Add bay details" notification action can re-deliver to the running activity via `onNewIntent` rather than rebuilding it.
 - **Manifest-registered BT receiver** rather than a long-running service. `ACTION_ACL_DISCONNECTED` is on the implicit-broadcast exemption list, so it still fires on Android 8+ without the app needing to be alive.
 - **Background-location permission + battery-optimisation exemption.** Required for the automatic capture to be legal on modern Android: `ACCESS_BACKGROUND_LOCATION` lets the location-typed FGS be created from the background (Android 14+ throws otherwise), and the battery exemption is the FGS background-start exemption the receiver relies on. The receiver pre-flights these and skips the capture (logging a warning) rather than crashing when they're missing; the service additionally guards `startForeground` so a system refusal can never take down the process. Companion Device Manager would be the Google-blessed alternative that avoids the background-location grant — noted as a possible future rework.

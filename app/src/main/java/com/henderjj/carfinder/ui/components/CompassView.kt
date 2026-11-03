@@ -54,8 +54,8 @@ private val CARDINALS = listOf("N" to 0.0, "E" to 90.0, "S" to 180.0, "W" to 270
 fun CompassView(
     bearingToCarDegrees: Float,
     deviceAzimuthDegrees: Float,
-    needsCalibration: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    needsCalibration: Boolean = false
 ) {
     val ringColor = MaterialTheme.colorScheme.outline
     val arrowColor = MaterialTheme.colorScheme.secondary

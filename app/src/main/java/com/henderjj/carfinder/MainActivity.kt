@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -84,7 +85,8 @@ private fun Root(
     }
     val isPaired: Boolean? by pairedFlow.collectAsStateWithLifecycle(initialValue = null)
 
-    var forceSetup by remember { mutableStateOf(false) }
+    // Saveable so "Change paired car" survives rotation on large screens.
+    var forceSetup by rememberSaveable { mutableStateOf(false) }
 
     when (isPaired) {
         null -> Unit // still loading from DataStore

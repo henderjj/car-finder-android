@@ -113,13 +113,13 @@ class ParkingCaptureService : Service() {
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .build()
 
-        // ServiceCompat passes the type on API 29+ and falls back below that.
-        ServiceCompat.startForeground(
-            this,
-            NOTIF_SERVICE,
-            notification,
+        // Foreground service types only exist on API 29+; on API 28 ServiceCompat ignores the type.
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
-        )
+        } else {
+            0
+        }
+        ServiceCompat.startForeground(this, NOTIF_SERVICE, notification, type)
     }
 
     private fun notifyCaptured() {
@@ -170,12 +170,7 @@ class ParkingCaptureService : Service() {
                 PackageManager.PERMISSION_GRANTED
 
     private fun stopSelfSafely() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            stopForeground(STOP_FOREGROUND_REMOVE)
-        } else {
-            @Suppress("DEPRECATION")
-            stopForeground(true)
-        }
+        stopForeground(STOP_FOREGROUND_REMOVE)
         stopSelf()
     }
 

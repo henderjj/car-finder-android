@@ -1,5 +1,6 @@
 package com.henderjj.carfinder.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
@@ -30,7 +31,7 @@ data class PairedCar(
     val name: String
 )
 
-class AppPreferences(private val context: Context) {
+class AppPreferences private constructor(private val context: Context) {
 
     val parking: Flow<ParkingLocation?> = context.dataStore.data.map { p ->
         val lat = p[KEY_LAT] ?: return@map null
@@ -120,6 +121,8 @@ class AppPreferences(private val context: Context) {
         private val KEY_CAR_ADDR = stringPreferencesKey("car_addr")
         private val KEY_CAR_NAME = stringPreferencesKey("car_name")
 
+        // Holds only the Application context (see get()), so it cannot leak an Activity.
+        @SuppressLint("StaticFieldLeak")
         @Volatile private var instance: AppPreferences? = null
         fun get(context: Context): AppPreferences =
             instance ?: synchronized(this) {

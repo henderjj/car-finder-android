@@ -42,6 +42,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.henderjj.carfinder.R
 import com.henderjj.carfinder.sensors.CompassAccuracy
 import com.henderjj.carfinder.ui.components.CompassView
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
 import com.henderjj.carfinder.ui.components.OsmMapView
 import java.text.DateFormat
 import java.util.Date
@@ -245,9 +247,16 @@ private fun ParkingDetailsRow(
             add(androidx.compose.ui.res.stringResource(R.string.details_space_prefix, spaceNumber))
     }
     val hasAny = parts.isNotEmpty()
+    // Once details exist the chip shows them, so tell screen readers what tapping does.
+    val editLabel = androidx.compose.ui.res.stringResource(R.string.main_details_edit)
 
     AssistChip(
         onClick = onClick,
+        modifier = if (hasAny) {
+            Modifier.semantics { onClick(label = editLabel) { onClick(); true } }
+        } else {
+            Modifier
+        },
         label = {
             Text(
                 if (hasAny) parts.joinToString("  ·  ")
