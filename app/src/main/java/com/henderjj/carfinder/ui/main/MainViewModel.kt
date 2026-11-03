@@ -154,7 +154,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     override fun onCleared() {
         stopLocationUpdates()
-        super.onCleared()
     }
 }
 

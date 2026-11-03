@@ -53,14 +53,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CarFinder"
-        tools:targetApi="35">
+        tools:targetApi="37">
 
+        <!-- Portrait is honoured on phones. From API 36+ Android ignores it on large
+             screens (sw >= 600dp), so the UI and its state must also survive rotation. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.CarFinder">
+            android:theme="@style/Theme.CarFinder"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

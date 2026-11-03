@@ -22,7 +22,6 @@ class CarFinderApp : Application() {
     }
 
     private fun createNotificationChannels() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
         val nm = getSystemService<NotificationManager>() ?: return
 
         nm.createNotificationChannel(

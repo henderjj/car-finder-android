@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.henderjj.carfinder"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.henderjj.carfinder"
         minSdk = 28
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
     }
